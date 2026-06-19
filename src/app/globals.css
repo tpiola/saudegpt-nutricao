@@ -1,15 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --navy: #0A1628;
-  --navy-light: #1A2A4A;
-  --gold: #D4A843;
-  --gold-light: #F0D68A;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+@theme inline {
+  --color-background: #050F0D;
+  --color-surface: #0A1A17;
+  --color-emerald: #00C9A7;
+  --color-emerald-dark: #008F7A;
+  --color-gold: #D4A843;
+  --color-gold-light: #F0D68A;
+  --color-foreground: #EDF0EC;
+  --color-muted: #80A098;
+  --color-subtle: #5A7A70;
+  --color-border: rgba(0, 201, 167, 0.10);
 }
 
 * {
@@ -23,11 +24,12 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--navy);
-  color: #fff;
+  background: var(--color-background);
+  color: var(--color-foreground);
   min-height: 100vh;
 }
 
@@ -36,12 +38,12 @@ a {
   text-decoration: none;
 }
 
-.glass {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow);
+/* ========== ANIMATED BACKGROUND ========== */
+
+.bg-animated {
+  background: linear-gradient(135deg, #050F0D, #0A1A17, #051210, #050F0D);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
 }
 
 @keyframes gradientShift {
@@ -50,58 +52,161 @@ a {
   100% { background-position: 0% 50%; }
 }
 
-.bg-animated {
-  background: linear-gradient(135deg, #0A1628, #1A2A4A, #0D1F3C, #0A1628);
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
-}
+/* ========== ORBS ========== */
 
 .orb {
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.15;
+  opacity: 0.12;
   pointer-events: none;
 }
 
 .orb-1 {
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, #D4A843, transparent);
-  top: -100px;
-  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #00C9A7, transparent);
+  top: -200px;
+  right: -150px;
 }
 
 .orb-2 {
-  width: 350px;
-  height: 350px;
-  background: radial-gradient(circle, #F0D68A, transparent);
-  bottom: -80px;
-  left: -80px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, #D4A843, transparent);
+  bottom: -150px;
+  left: -100px;
 }
 
 .orb-3 {
-  width: 250px;
-  height: 250px;
-  background: radial-gradient(circle, #D4A843, transparent);
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, #00C9A7, transparent);
+  top: 40%;
+  left: 60%;
 }
 
-.text-gold {
+/* ========== TYPEWRITER ========== */
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typewriter-cursor {
+  animation: blink 0.8s step-end infinite;
+  display: inline-block;
+}
+
+/* ========== CARDS ========== */
+
+.card-glass {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+
+.card-glass:hover {
+  border-color: rgba(0, 201, 167, 0.25);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 201, 167, 0.08);
+}
+
+/* ========== BUTTONS ========== */
+
+.btn-primary {
+  background: linear-gradient(135deg, #00C9A7, #00A88A);
+  color: #050F0D;
+  font-weight: 700;
+  padding: 14px 32px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 201, 167, 0.3);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-emerald);
+  font-weight: 600;
+  padding: 12px 28px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 201, 167, 0.3);
+  cursor: pointer;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--color-emerald);
+  background: rgba(0, 201, 167, 0.06);
+  transform: translateY(-2px);
+}
+
+/* ========== SECTION GLASS ========== */
+
+.section-glass {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+}
+
+/* ========== BADGE ========== */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(0, 201, 167, 0.1);
+  border: 1px solid rgba(0, 201, 167, 0.2);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 0.8rem;
+  color: var(--color-emerald);
+  font-weight: 600;
+}
+
+/* ========== GRADIENT TEXT ========== */
+
+.text-gradient-emerald {
+  background: linear-gradient(135deg, #00C9A7, #66E3CC);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
   background: linear-gradient(135deg, #D4A843, #F0D68A);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
+/* ========== INPUT ========== */
+
 .input-glass {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(0, 201, 167, 0.12);
   border-radius: 12px;
   padding: 14px 18px;
-  color: #fff;
+  color: var(--color-foreground);
   font-size: 1rem;
   width: 100%;
   outline: none;
@@ -109,51 +214,90 @@ a {
 }
 
 .input-glass:focus {
-  border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.15);
+  border-color: var(--color-emerald);
+  box-shadow: 0 0 0 3px rgba(0, 201, 167, 0.15);
 }
 
 .input-glass::placeholder {
-  color: rgba(255, 255, 255, 0.35);
+  color: var(--color-subtle);
 }
 
-.btn-gold {
-  background: linear-gradient(135deg, #D4A843, #F0D68A);
-  color: #0A1628;
-  font-weight: 700;
-  padding: 14px 32px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.3s ease;
+/* ========== DIVIDER ========== */
+
+.divider-gradient {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 201, 167, 0.2), transparent);
 }
 
-.btn-gold:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(212, 168, 67, 0.3);
+/* ========== ICON WRAPPER ========== */
+
+.icon-wrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: rgba(0, 201, 167, 0.08);
+  border: 1px solid rgba(0, 201, 167, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
 }
 
-.btn-gold:active {
-  transform: translateY(0);
+/* ========== MODULE BULLET ========== */
+
+.module-item {
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  position: relative;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  line-height: 1.6;
 }
 
-@keyframes shimmer {
-  0% { opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { opacity: 0.6; }
+.module-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.9rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-emerald);
+  opacity: 0.6;
 }
 
-.shimmer {
-  animation: shimmer 2s ease-in-out infinite;
-}
+/* ========== FLOATING ANIMATION ========== */
 
-@keyframes bounce {
+@keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-8px); }
 }
 
-.construction-icon {
-  animation: bounce 2s ease-in-out infinite;
-  display: inline-block;
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ========== FADE-IN ON SCROLL (simple) ========== */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* ========== RESPONSIVE ========== */
+
+.container-narrow {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .container-narrow {
+    padding: 0 2rem;
+  }
 }

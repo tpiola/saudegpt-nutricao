@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'SaúdeGPT Nutrição — Em Breve',
-  description: 'Curso de Nutrição Clínica com IA. Preparatório para o CRN. Em breve.',
+  title: 'SaúdeGPT Nutrição — Curso Completo de Nutrição Clínica com IA',
+  description: 'Curso completo de Nutrição Clínica com inteligência artificial. 6 módulos, preparatório CRN, avaliação nutricional, dietoterapia, nutrição esportiva e mais.',
 }
 
 export default function RootLayout({
